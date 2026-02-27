@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SUSHILANDIA & SNACK</title>
+    <style>
+        body {
+            background-color: #000; /* Fondo negro */
+            color: #fff; /* Letras blancas */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff0000; /* Título rojo */
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #ffcc00; /* Subtítulos amarillos */
+            font-size: 25px;
+        }
+        .plato {
+            display: inline-block;
+            margin: 15px;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        img {
+            width: 250px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍣 SUSHILANDIA & SNACK 🍣</h1>
+    <h2>LOGO DEL LOCAL</h2>
+    <div class="plato">
+        <img src="{{ url_for('static', filename='img/logo.jpg') }}">
+    </div>
+
+    <h2>ROLLOS</h2>
+    <div class="plato">
+        <img src="{{ url_for('static', filename='img/rollos.jpg') }}">
+    </div>
+
+    <h2>YAKIMESHI</h2>
+    <div class="plato">
+        <img src="{{ url_for('static', filename='img/yakimeshi.jpg') }}">
+    </div>
+
+    <h2>CHAROLAS Y JACKETS</h2>
+    <div class="plato">
+        <img src="{{ url_for('static', filename='img/charolas y jackets.jpg') }}">
+    </div>
+
+    <h2>COMBOS</h2>
+    <div class="plato">
+        <img src="{{ url_for('static', filename='img/combos.jpg') }}">
+    </div>
+
+    <p>¡ORDENA YA! 📲</p>
+</body>
+</html>
