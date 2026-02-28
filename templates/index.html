@@ -5,121 +5,180 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
 <style>
 
-/* ===== FONDO ===== */
+/* ===== SCROLL SUAVE ===== */
+html{
+scroll-behavior:smooth;
+}
+
+/* ===== FONDO PREMIUM ===== */
 body{
-    background:linear-gradient(180deg,#000,#0a0a0a,#111);
-    color:white;
-    font-family:'Poppins',sans-serif;
-    text-align:center;
-    margin:0;
+background:
+radial-gradient(circle at 20% 20%, #1a0000, transparent 40%),
+radial-gradient(circle at 80% 80%, #001a1a, transparent 40%),
+#000;
+background-size:200% 200%;
+animation:fondoMove 12s infinite alternate;
+color:white;
+font-family:'Poppins',sans-serif;
+margin:0;
+text-align:center;
+padding-top:80px;
+}
+
+@keyframes fondoMove{
+from{background-position:0% 50%;}
+to{background-position:100% 50%;}
+}
+
+/* ===== LOADER ===== */
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+z-index:9999;
+animation:fadeOut 2s forwards;
+animation-delay:1.5s;
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(12px);
+padding:15px;
+display:flex;
+justify-content:center;
+gap:20px;
+z-index:1000;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.navbar a:hover{
+color:#ff0000;
+transform:scale(1.1);
 }
 
 /* ===== TITULO ===== */
 h1{
-    color:#ff0000;
-    font-size:45px;
-    animation:fadeDown 1s;
+color:#ff0000;
+font-size:45px;
 }
 
 /* ===== SECCIONES ===== */
 h2{
-    color:#ffcc00;
-    margin-top:50px;
+color:#ffcc00;
+margin-top:60px;
 }
 
 /* ===== CONTENEDOR ===== */
 .menu{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:25px;
-    padding:20px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+padding:20px;
 }
 
-/* ===== TARJETAS PRO ===== */
+/* ===== TARJETAS ===== */
 .plato{
-    background:#141414;
-    padding:15px;
-    border-radius:18px;
-    position:relative;
-    overflow:hidden;
-    transition:0.4s;
+background:rgba(20,20,20,0.8);
+backdrop-filter:blur(10px);
+padding:15px;
+border-radius:18px;
+overflow:hidden;
+transition:.4s;
+position:relative;
 }
 
-/* brillo premium */
+/* brillo */
 .plato::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.3),
-        transparent
-    );
-    transition:0.6s;
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,.3),
+transparent);
+transition:.6s;
 }
 
 .plato:hover::before{
-    left:100%;
+left:100%;
 }
 
 .plato:hover{
-    transform:translateY(-10px) scale(1.03);
-    box-shadow:0 15px 35px rgba(255,0,0,0.5);
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 15px 35px rgba(255,0,0,.6);
 }
 
-/* ===== IMAGENES ===== */
+/* ===== IMAGEN ===== */
 .plato img{
-    width:300px;
-    border-radius:12px;
-    transition:0.5s;
+width:300px;
+border-radius:12px;
+transition:.5s;
 }
 
 .plato:hover img{
-    transform:scale(1.08);
+transform:scale(1.1);
 }
 
-/* ===== BOTON WHATSAPP ===== */
+/* ===== SCROLL ANIMATION ===== */
+.hidden{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ===== WHATSAPP ===== */
 .whatsapp{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#25D366;
-    color:white;
-    padding:15px 22px;
-    border-radius:50px;
-    text-decoration:none;
-    font-size:18px;
-    font-weight:bold;
-    box-shadow:0 0 15px black;
-    animation:float 2s infinite;
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px 22px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 0 20px black;
+animation:float 2s infinite;
 }
 
 @keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
-    100%{transform:translateY(0);}
-}
-
-/* entrada titulo */
-@keyframes fadeDown{
-    from{
-        opacity:0;
-        transform:translateY(-40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
 }
 
 </style>
@@ -127,66 +186,80 @@ h2{
 
 <body>
 
-<h1 class="animate__animated animate__fadeInDown">
-🍣 SUSHILANDIA & SNACK 🍣
-</h1>
+<!-- LOADER -->
+<div id="loader">🍣 Cargando Sushilandia...</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+<a href="#promos">🔥 Promos</a>
+<a href="#rollos">🍣 Rollos</a>
+<a href="#yakimeshi">🍚 Yakimeshi</a>
+<a href="#charolas">🍱 Charolas</a>
+<a href="#combos">🥢 Combos</a>
+</div>
+
+<h1>🍣 SUSHILANDIA & SNACK 🍣</h1>
 
 <!-- LOGO -->
-<h2 class="animate__animated animate__fadeInUp">LOGO DEL LOCAL</h2>
-<div class="menu animate__animated animate__zoomIn">
+<div class="hidden">
+<h2>LOGO DEL LOCAL</h2>
+<div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/logo.jpg') }}">
 </div>
 </div>
+</div>
 
-<!-- PROMOCIONES -->
-<h2 class="animate__animated animate__fadeInUp">
-🔥 PROMOCIONES DEL DÍA 🔥
-</h2>
-
-<div class="menu animate__animated animate__fadeInUp">
-
+<!-- PROMOS -->
+<div class="hidden" id="promos">
+<h2>🔥 PROMOCIONES DEL DÍA 🔥</h2>
+<div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/promo1.jpg') }}">
 </div>
-
 <div class="plato">
 <img src="{{ url_for('static', filename='img/promo2.jpg') }}">
 </div>
-
+</div>
 </div>
 
 <!-- ROLLOS -->
-<h2 class="animate__animated animate__fadeInUp">ROLLOS</h2>
-<div class="menu animate__animated animate__fadeInUp">
+<div class="hidden" id="rollos">
+<h2>ROLLOS</h2>
+<div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/rollos.jpg') }}">
 </div>
 </div>
+</div>
 
 <!-- YAKIMESHI -->
-<h2 class="animate__animated animate__fadeInUp">YAKIMESHI</h2>
-<div class="menu animate__animated animate__fadeInUp">
+<div class="hidden" id="yakimeshi">
+<h2>YAKIMESHI</h2>
+<div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/yakimeshi.jpg') }}">
 </div>
 </div>
+</div>
 
 <!-- CHAROLAS -->
-<h2 class="animate__animated animate__fadeInUp">
-CHAROLAS Y JACKETS
-</h2>
-<div class="menu animate__animated animate__fadeInUp">
+<div class="hidden" id="charolas">
+<h2>CHAROLAS Y JACKETS</h2>
+<div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/charolas_jackets.jpg') }}">
 </div>
 </div>
+</div>
 
 <!-- COMBOS -->
-<h2 class="animate__animated animate__fadeInUp">COMBOS</h2>
-<div class="menu animate__animated animate__fadeInUp">
+<div class="hidden" id="combos">
+<h2>COMBOS</h2>
+<div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/combos.jpg') }}">
+</div>
 </div>
 </div>
 
@@ -196,6 +269,20 @@ href="https://wa.me/5213123098217"
 target="_blank">
 📲 Ordenar
 </a>
+
+<!-- ANIMACION SCROLL -->
+<script>
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
+
+document.querySelectorAll('.hidden')
+.forEach(el=>observer.observe(el));
+</script>
 
 </body>
 </html>
