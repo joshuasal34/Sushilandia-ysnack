@@ -12,7 +12,7 @@
 /* ===== ANIMACION APP MODERNA ===== */
 body{
 margin:0;
-padding-top:110px;
+padding-top:85px; /* Ajustado para que no tape secciones */
 font-family:'Montserrat',sans-serif;
 color:white;
 text-align:center;
@@ -40,7 +40,7 @@ animation:moveBg 25s infinite alternate ease-in-out;
 
 @keyframes moveBg{
 from{transform:scale(1);}
-to{transform:scale(1.08);}
+to{transform:scale(1.1);}
 }
 
 body::after{
@@ -54,14 +54,14 @@ background:rgba(0,0,0,0.55);
 z-index:-1;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR GLASS ===== */
 .navbar{
 position:fixed;
 top:0;
 width:100%;
 background:rgba(0,0,0,0.55);
 backdrop-filter:blur(18px);
-padding:18px;
+padding:15px;
 display:flex;
 justify-content:center;
 gap:25px;
@@ -81,7 +81,7 @@ color:#ffcc00;
 transform:scale(1.1);
 }
 
-/* ===== TITULO ===== */
+/* ===== TITULO BRILLO ===== */
 .shine{
 font-family:'Bebas Neue',cursive;
 font-size:70px;
@@ -98,13 +98,13 @@ animation:shine 3s linear infinite;
 to{background-position:200% center;}
 }
 
-/* ===== SECCIONES ===== */
 h2{
 font-family:'Bebas Neue',cursive;
 font-size:38px;
-margin-top:80px;
+margin-top:70px;
 }
 
+/* ===== TARJETAS GLASS ===== */
 .menu{
 display:flex;
 flex-wrap:wrap;
@@ -138,14 +138,18 @@ position:relative;
 width:300px;
 height:300px;
 margin:auto;
+overflow:hidden;
 }
 
 .slide{
 position:absolute;
 width:100%;
+height:100%;
 border-radius:20px;
 opacity:0;
-transition:1s;
+transition:opacity 1.2s ease-in-out;
+object-fit:cover;
+object-position:center;
 }
 
 .slide.active{
@@ -175,6 +179,7 @@ transform:scale(1.1);
 @media(max-width:768px){
 .plato img{width:240px;}
 .shine{font-size:50px;}
+.carousel{width:250px;height:250px;}
 }
 
 </style>
@@ -183,25 +188,12 @@ transform:scale(1.1);
 <body>
 
 <div class="navbar">
-<a href="#logo">🍣 Inicio</a>
 <a href="#promos">🔥 Promos</a>
-<a href="#rollos">🍥 Rollos</a>
-<a href="#yakimeshi">🍚 Yakimeshi</a>
-<a href="#charolas">🍱 Charolas</a>
+<a href="#rollos">🍣 Rollos</a>
 <a href="#combos">🥢 Combos</a>
 </div>
 
 <h1 class="shine">SUSHILANDIA & SNACK</h1>
-
-<!-- LOGO -->
-<div id="logo">
-<h2>NUESTRO LOGO</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/logo.jpg') }}">
-</div>
-</div>
-</div>
 
 <!-- PROMOS -->
 <div id="promos">
@@ -217,27 +209,10 @@ transform:scale(1.1);
 <h2>ROLLOS</h2>
 <div class="menu">
 <div class="plato">
-<img src="{{ url_for('static', filename='img/rollos.jpg') }}">
+<img src="{{ url_for('static', filename='img/rollo1.jpg') }}">
 </div>
-</div>
-</div>
-
-<!-- YAKIMESHI -->
-<div id="yakimeshi">
-<h2>YAKIMESHI</h2>
-<div class="menu">
 <div class="plato">
-<img src="{{ url_for('static', filename='img/yakimeshi.jpg') }}">
-</div>
-</div>
-</div>
-
-<!-- CHAROLAS -->
-<div id="charolas">
-<h2>CHAROLAS Y JACKETS</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/charolas_jackets.jpg') }}">
+<img src="{{ url_for('static', filename='img/rollo2.jpg') }}">
 </div>
 </div>
 </div>
@@ -247,7 +222,10 @@ transform:scale(1.1);
 <h2>COMBOS</h2>
 <div class="menu">
 <div class="plato">
-<img src="{{ url_for('static', filename='img/combos.jpg') }}">
+<img src="{{ url_for('static', filename='img/combo1.jpg') }}">
+</div>
+<div class="plato">
+<img src="{{ url_for('static', filename='img/combo2.jpg') }}">
 </div>
 </div>
 </div>
@@ -258,14 +236,15 @@ transform:scale(1.1);
 
 <script>
 
-/* Carrusel automático */
+/* Carrusel 8 segundos */
 let slides=document.querySelectorAll('.slide');
 let index=0;
+
 setInterval(()=>{
 slides[index].classList.remove('active');
 index=(index+1)%slides.length;
 slides[index].classList.add('active');
-},3000);
+},8000);
 
 </script>
 
