@@ -3,148 +3,255 @@
 <head>
 <title>SUSHILANDIA & SNACK</title>
 
-<!-- FUENTES PRO -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== SCROLL SUAVE ===== */
-html{
-scroll-behavior:smooth;
-}
-
-/* ===== FONDO ===== */
+/* ===== ANIMACION APP MODERNA ===== */
 body{
 margin:0;
-padding-top:90px;
+padding-top:110px;
+font-family:'Montserrat',sans-serif;
 color:white;
-font-family:'Montserrat', sans-serif;
 text-align:center;
-
-background-image:url("{{ url_for('static', filename='img/fondo.jpg') }}");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-background-repeat:no-repeat;
+overflow-x:hidden;
+animation:fadeApp 1.2s ease;
 }
 
-/* ===== NAVBAR ===== */
+@keyframes fadeApp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== FONDO CON MOVIMIENTO ===== */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("{{ url_for('static', filename='img/fondo.jpg') }}") center/cover no-repeat;
+z-index:-2;
+animation:moveBg 25s infinite alternate ease-in-out;
+}
+
+@keyframes moveBg{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* Overlay oscuro */
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+/* ===== NAVBAR GLASS ===== */
 .navbar{
 position:fixed;
 top:0;
 width:100%;
-background:rgba(0,0,0,0.75);
-backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(18px);
 padding:18px;
 display:flex;
 justify-content:center;
 gap:25px;
 z-index:1000;
-border-bottom:1px solid rgba(255,255,255,0.1);
+border-bottom:1px solid rgba(255,255,255,0.15);
 }
 
 .navbar a{
 color:white;
 text-decoration:none;
 font-weight:600;
-letter-spacing:1px;
 transition:.3s;
 }
 
 .navbar a:hover{
 color:#ffcc00;
-transform:scale(1.15);
+transform:scale(1.1);
 }
 
-/* ===== TITULO ===== */
-h1{
-font-family:'Bebas Neue', cursive;
-font-size:70px;
+/* ===== TITULO BRILLO ===== */
+.shine{
+font-family:'Bebas Neue',cursive;
+font-size:75px;
 letter-spacing:6px;
-color:#ffcc00;
-text-shadow:0 8px 25px rgba(0,0,0,.8);
-margin-top:20px;
+background:linear-gradient(90deg,#ffcc00,#ffffff,#ffcc00);
+background-size:200% auto;
+color:transparent;
+background-clip:text;
+-webkit-background-clip:text;
+animation:shine 3s linear infinite;
+}
+
+@keyframes shine{
+to{background-position:200% center;}
 }
 
 /* ===== SUBTITULOS ===== */
 h2{
-font-family:'Bebas Neue', cursive;
-font-size:38px;
-letter-spacing:4px;
-color:white;
-margin-top:70px;
-text-shadow:0 5px 20px rgba(0,0,0,.9);
+font-family:'Bebas Neue',cursive;
+font-size:40px;
+margin-top:80px;
 }
 
-/* ===== CONTENEDOR ===== */
+/* ===== TARJETAS GLASS ===== */
 .menu{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:30px;
-padding:25px;
+padding:30px;
 }
 
-/* ===== TARJETAS ===== */
 .plato{
-background:rgba(0,0,0,0.65);
-backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(20px);
 padding:20px;
-border-radius:20px;
-overflow:hidden;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.15);
 transition:.4s;
-position:relative;
-border:1px solid rgba(255,255,255,0.1);
 }
 
 .plato:hover{
-transform:translateY(-12px) scale(1.08);
+transform:translateY(-10px) scale(1.05);
 box-shadow:0 20px 40px rgba(0,0,0,.8);
 }
 
-/* ===== IMAGEN ===== */
 .plato img{
-width:320px;
-border-radius:15px;
-transition:.5s;
+width:300px;
+border-radius:20px;
 }
 
-.plato:hover img{
-transform:scale(1.1);
+/* ===== PRECIOS ===== */
+.price{
+margin-top:15px;
+font-size:20px;
+font-weight:800;
+color:#ffcc00;
 }
 
-/* ===== LOADER ===== */
-#loader{
-position:fixed;
+/* ===== CARRUSEL ===== */
+.carousel{
+position:relative;
+width:300px;
+height:300px;
+margin:auto;
+}
+
+.slide{
+position:absolute;
 width:100%;
-height:100vh;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:28px;
-z-index:9999;
-animation:fadeOut 2s forwards;
-animation-delay:1.5s;
-}
-
-@keyframes fadeOut{
-to{
+border-radius:20px;
 opacity:0;
-visibility:hidden;
-}
-}
-
-/* ===== SCROLL ANIMATION ===== */
-.hidden{
-opacity:0;
-transform:translateY(60px);
 transition:1s;
 }
 
-.show{
+.slide.active{
 opacity:1;
-transform:translateY(0);
+}
+
+/* ===== BOTON MENU ===== */
+.openMenu{
+margin-top:50px;
+padding:15px 35px;
+background:linear-gradient(45deg,#ffcc00,#ff9900);
+color:black;
+font-weight:bold;
+border:none;
+border-radius:50px;
+cursor:pointer;
+transition:.3s;
+}
+
+.openMenu:hover{
+transform:scale(1.1);
+}
+
+/* ===== VISOR PDF PREMIUM ===== */
+.pdf-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(12px);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+visibility:hidden;
+transition:.4s;
+z-index:2000;
+}
+
+.pdf-container.active{
+opacity:1;
+visibility:visible;
+}
+
+.pdf-content{
+width:85%;
+height:90%;
+background:rgba(0,0,0,0.9);
+border-radius:20px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+animation:zoomIn .4s ease;
+}
+
+@keyframes zoomIn{
+from{transform:scale(.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.pdf-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+background:rgba(255,255,255,0.1);
+font-weight:bold;
+}
+
+.pdf-actions{
+display:flex;
+gap:15px;
+align-items:center;
+}
+
+.downloadInside{
+background:#ffcc00;
+color:black;
+padding:8px 15px;
+border-radius:20px;
+text-decoration:none;
+font-size:14px;
+font-weight:bold;
+}
+
+.closeBtn{
+font-size:22px;
+cursor:pointer;
+}
+
+.pdf-content iframe{
+flex:1;
+width:100%;
+border:none;
 }
 
 /* ===== WHATSAPP ===== */
@@ -166,106 +273,98 @@ transition:.3s;
 transform:scale(1.1);
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+.plato img{width:240px;}
+.pdf-content{width:95%;height:85%;}
+.shine{font-size:50px;}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">🍣 Cargando Sushilandia...</div>
-
-<!-- NAVBAR -->
 <div class="navbar">
 <a href="#promos">🔥 Promos</a>
-<a href="#rollos">🍣 Rollos</a>
 <a href="#yakimeshi">🍚 Yakimeshi</a>
-<a href="#charolas">🍱 Charolas</a>
 <a href="#combos">🥢 Combos</a>
 </div>
 
-<h1>🍣 SUSHILANDIA & SNACK 🍣</h1>
-
-<!-- LOGO -->
-<div class="hidden">
-<h2>LOGO DEL LOCAL</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/logo.jpg') }}">
-</div>
-</div>
-</div>
+<h1 class="shine">SUSHILANDIA & SNACK</h1>
 
 <!-- PROMOS -->
-<div class="hidden" id="promos">
-<h2>PROMOCIONES DEL DÍA</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/promo1.jpg') }}">
-</div>
-<div class="plato">
-<img src="{{ url_for('static', filename='img/promo2.jpg') }}">
-</div>
-</div>
-</div>
-
-<!-- ROLLOS -->
-<div class="hidden" id="rollos">
-<h2>ROLLOS</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/rollos.jpg') }}">
-</div>
+<div id="promos">
+<h2>PROMOCIONES</h2>
+<div class="carousel">
+<img class="slide active" src="{{ url_for('static', filename='img/promo1.jpg') }}">
+<img class="slide" src="{{ url_for('static', filename='img/promo2.jpg') }}">
 </div>
 </div>
 
 <!-- YAKIMESHI -->
-<div class="hidden" id="yakimeshi">
+<div id="yakimeshi">
 <h2>YAKIMESHI</h2>
 <div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/yakimeshi.jpg') }}">
-</div>
-</div>
-</div>
-
-<!-- CHAROLAS -->
-<div class="hidden" id="charolas">
-<h2>CHAROLAS Y JACKETS</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/charolas_jackets.jpg') }}">
+<div class="price">$120 MXN</div>
 </div>
 </div>
 </div>
 
 <!-- COMBOS -->
-<div class="hidden" id="combos">
+<div id="combos">
 <h2>COMBOS</h2>
 <div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/combos.jpg') }}">
+<div class="price">$250 MXN</div>
 </div>
 </div>
 </div>
 
-<!-- WHATSAPP -->
-<a class="whatsapp"
-href="https://wa.me/5213123098217"
-target="_blank">
+<!-- BOTON MENU -->
+<button class="openMenu" onclick="openPDF()">📄 Ver Menú Completo</button>
+
+<!-- VISOR PDF -->
+<div id="pdfViewer" class="pdf-container">
+<div class="pdf-content">
+<div class="pdf-header">
+<span>Menú Completo</span>
+<div class="pdf-actions">
+<a href="{{ url_for('static', filename='menu.pdf') }}" download class="downloadInside">⬇ Descargar</a>
+<span class="closeBtn" onclick="closePDF()">✖</span>
+</div>
+</div>
+<iframe src="{{ url_for('static', filename='menu.pdf') }}"></iframe>
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/5213123098217" target="_blank">
 📲 Ordenar
 </a>
 
-<!-- ANIMACION SCROLL -->
 <script>
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
+
+/* Carrusel */
+let slides=document.querySelectorAll('.slide');
+let index=0;
+setInterval(()=>{
+slides[index].classList.remove('active');
+index=(index+1)%slides.length;
+slides[index].classList.add('active');
+},3000);
+
+/* Visor PDF */
+function openPDF(){
+document.getElementById("pdfViewer").classList.add("active");
 }
-});
-});
-document.querySelectorAll('.hidden')
-.forEach(el=>observer.observe(el));
+
+function closePDF(){
+document.getElementById("pdfViewer").classList.remove("active");
+}
+
 </script>
 
 </body>
