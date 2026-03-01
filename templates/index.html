@@ -12,24 +12,19 @@ html{
 scroll-behavior:smooth;
 }
 
-/* ===== FONDO PREMIUM ===== */
+/* ===== FONDO CON IMAGEN ===== */
 body{
-background:
-radial-gradient(circle at 20% 20%, #1a0000, transparent 40%),
-radial-gradient(circle at 80% 80%, #001a1a, transparent 40%),
-#000;
-background-size:200% 200%;
-animation:fondoMove 12s infinite alternate;
+margin:0;
+padding-top:80px;
 color:white;
 font-family:'Poppins',sans-serif;
-margin:0;
 text-align:center;
-padding-top:80px;
-}
 
-@keyframes fondoMove{
-from{background-position:0% 50%;}
-to{background-position:100% 50%;}
+background-image:url("{{ url_for('static', filename='img/fondo.jpg') }}");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+background-repeat:no-repeat;
 }
 
 /* ===== LOADER ===== */
@@ -103,7 +98,7 @@ padding:20px;
 
 /* ===== TARJETAS ===== */
 .plato{
-background:rgba(20,20,20,0.8);
+background:rgba(0,0,0,0.7);
 backdrop-filter:blur(10px);
 padding:15px;
 border-radius:18px;
@@ -112,7 +107,6 @@ transition:.4s;
 position:relative;
 }
 
-/* brillo */
 .plato::before{
 content:'';
 position:absolute;
@@ -279,7 +273,6 @@ entry.target.classList.add('show');
 }
 });
 });
-
 document.querySelectorAll('.hidden')
 .forEach(el=>observer.observe(el));
 </script>
