@@ -1,72 +1,57 @@
-[4:39 a.m., 1/3/2026] +52 1 312 242 4334: <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>SUSHILANDIA & SNACK</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-
-/* ===== SCROLL SUAVE ===== */
-html{
-scroll-behavior:smooth;
-}
-
-/* ===== FONDO CON IMAGEN ===== */
-body{
-margin:0;
-padding-top:80px;
-color:white;
-font-family:'Poppins',sans-serif;
-text-align:center;
-
-background-image:url("{{ url_for('static', filename='img/fondo.jpg') }}");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-background-repeat:no-repeat;
-}
-
-/* ===== LOADER ===== */
-#loader{
-position:fixed;
-width:100%;
-height:100vh;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:28px;
-z-index:9999;
-animation:fad…
-[4:53 a.m., 1/3/2026] +52 1 312 242 4334: <!DOCTYPE html>
-<html>
-<head>
-<title>SUSHILANDIA & SNACK</title>
-
-<!-- FUENTES PRO -->
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== SCROLL SUAVE ===== */
-html{
-scroll-behavior:smooth;
-}
-
-/* ===== FONDO ===== */
+/* ===== ANIMACION APP MODERNA ===== */
 body{
 margin:0;
-padding-top:90px;
+padding-top:110px;
+font-family:'Montserrat',sans-serif;
 color:white;
-font-family:'Montserrat', sans-serif;
 text-align:center;
+overflow-x:hidden;
+animation:fadeApp 1.2s ease;
+}
 
-background-image:url("{{ url_for('static', filename='img/fondo.jpg') }}");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-background-repeat:no-repeat;
+@keyframes fadeApp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== FONDO CON MOVIMIENTO ===== */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("{{ url_for('static', filename='img/fondo.jpg') }}") center/cover no-repeat;
+z-index:-2;
+animation:moveBg 25s infinite alternate ease-in-out;
+}
+
+@keyframes moveBg{
+from{transform:scale(1);}
+to{transform:scale(1.08);}
+}
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
 }
 
 /* ===== NAVBAR ===== */
@@ -74,118 +59,97 @@ background-repeat:no-repeat;
 position:fixed;
 top:0;
 width:100%;
-background:rgba(0,0,0,0.75);
-backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(18px);
 padding:18px;
 display:flex;
 justify-content:center;
 gap:25px;
 z-index:1000;
-border-bottom:1px solid rgba(255,255,255,0.1);
+border-bottom:1px solid rgba(255,255,255,0.15);
 }
 
 .navbar a{
 color:white;
 text-decoration:none;
 font-weight:600;
-letter-spacing:1px;
 transition:.3s;
 }
 
 .navbar a:hover{
 color:#ffcc00;
-transform:scale(1.15);
+transform:scale(1.1);
 }
 
 /* ===== TITULO ===== */
-h1{
-font-family:'Bebas Neue', cursive;
+.shine{
+font-family:'Bebas Neue',cursive;
 font-size:70px;
 letter-spacing:6px;
-color:#ffcc00;
-text-shadow:0 8px 25px rgba(0,0,0,.8);
-margin-top:20px;
+background:linear-gradient(90deg,#ffcc00,#ffffff,#ffcc00);
+background-size:200% auto;
+color:transparent;
+background-clip:text;
+-webkit-background-clip:text;
+animation:shine 3s linear infinite;
 }
 
-/* ===== SUBTITULOS ===== */
+@keyframes shine{
+to{background-position:200% center;}
+}
+
+/* ===== SECCIONES ===== */
 h2{
-font-family:'Bebas Neue', cursive;
+font-family:'Bebas Neue',cursive;
 font-size:38px;
-letter-spacing:4px;
-color:white;
-margin-top:70px;
-text-shadow:0 5px 20px rgba(0,0,0,.9);
+margin-top:80px;
 }
 
-/* ===== CONTENEDOR ===== */
 .menu{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:30px;
-padding:25px;
+padding:30px;
 }
 
-/* ===== TARJETAS ===== */
 .plato{
-background:rgba(0,0,0,0.65);
-backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(20px);
 padding:20px;
-border-radius:20px;
-overflow:hidden;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.15);
 transition:.4s;
-position:relative;
-border:1px solid rgba(255,255,255,0.1);
 }
 
 .plato:hover{
-transform:translateY(-12px) scale(1.08);
+transform:translateY(-10px) scale(1.05);
 box-shadow:0 20px 40px rgba(0,0,0,.8);
 }
 
-/* ===== IMAGEN ===== */
 .plato img{
-width:320px;
-border-radius:15px;
-transition:.5s;
+width:300px;
+border-radius:20px;
 }
 
-.plato:hover img{
-transform:scale(1.1);
+/* ===== CARRUSEL ===== */
+.carousel{
+position:relative;
+width:300px;
+height:300px;
+margin:auto;
 }
 
-/* ===== LOADER ===== */
-#loader{
-position:fixed;
+.slide{
+position:absolute;
 width:100%;
-height:100vh;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:28px;
-z-index:9999;
-animation:fadeOut 2s forwards;
-animation-delay:1.5s;
-}
-
-@keyframes fadeOut{
-to{
+border-radius:20px;
 opacity:0;
-visibility:hidden;
-}
-}
-
-/* ===== SCROLL ANIMATION ===== */
-.hidden{
-opacity:0;
-transform:translateY(60px);
 transition:1s;
 }
 
-.show{
+.slide.active{
 opacity:1;
-transform:translateY(0);
 }
 
 /* ===== WHATSAPP ===== */
@@ -207,28 +171,31 @@ transition:.3s;
 transform:scale(1.1);
 }
 
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+.plato img{width:240px;}
+.shine{font-size:50px;}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">🍣 Cargando Sushilandia...</div>
-
-<!-- NAVBAR -->
 <div class="navbar">
+<a href="#logo">🍣 Inicio</a>
 <a href="#promos">🔥 Promos</a>
-<a href="#rollos">🍣 Rollos</a>
+<a href="#rollos">🍥 Rollos</a>
 <a href="#yakimeshi">🍚 Yakimeshi</a>
 <a href="#charolas">🍱 Charolas</a>
 <a href="#combos">🥢 Combos</a>
 </div>
 
-<h1>🍣 SUSHILANDIA & SNACK 🍣</h1>
+<h1 class="shine">SUSHILANDIA & SNACK</h1>
 
 <!-- LOGO -->
-<div class="hidden">
-<h2>LOGO DEL LOCAL</h2>
+<div id="logo">
+<h2>NUESTRO LOGO</h2>
 <div class="menu">
 <div class="plato">
 <img src="{{ url_for('static', filename='img/logo.jpg') }}">
@@ -237,20 +204,16 @@ transform:scale(1.1);
 </div>
 
 <!-- PROMOS -->
-<div class="hidden" id="promos">
-<h2>PROMOCIONES DEL DÍA</h2>
-<div class="menu">
-<div class="plato">
-<img src="{{ url_for('static', filename='img/promo1.jpg') }}">
-</div>
-<div class="plato">
-<img src="{{ url_for('static', filename='img/promo2.jpg') }}">
-</div>
+<div id="promos">
+<h2>PROMOCIONES</h2>
+<div class="carousel">
+<img class="slide active" src="{{ url_for('static', filename='img/promo1.jpg') }}">
+<img class="slide" src="{{ url_for('static', filename='img/promo2.jpg') }}">
 </div>
 </div>
 
 <!-- ROLLOS -->
-<div class="hidden" id="rollos">
+<div id="rollos">
 <h2>ROLLOS</h2>
 <div class="menu">
 <div class="plato">
@@ -260,7 +223,7 @@ transform:scale(1.1);
 </div>
 
 <!-- YAKIMESHI -->
-<div class="hidden" id="yakimeshi">
+<div id="yakimeshi">
 <h2>YAKIMESHI</h2>
 <div class="menu">
 <div class="plato">
@@ -270,7 +233,7 @@ transform:scale(1.1);
 </div>
 
 <!-- CHAROLAS -->
-<div class="hidden" id="charolas">
+<div id="charolas">
 <h2>CHAROLAS Y JACKETS</h2>
 <div class="menu">
 <div class="plato">
@@ -280,7 +243,7 @@ transform:scale(1.1);
 </div>
 
 <!-- COMBOS -->
-<div class="hidden" id="combos">
+<div id="combos">
 <h2>COMBOS</h2>
 <div class="menu">
 <div class="plato">
@@ -289,24 +252,21 @@ transform:scale(1.1);
 </div>
 </div>
 
-<!-- WHATSAPP -->
-<a class="whatsapp"
-href="https://wa.me/5213123098217"
-target="_blank">
+<a class="whatsapp" href="https://wa.me/5213123098217" target="_blank">
 📲 Ordenar
 </a>
 
-<!-- ANIMACION SCROLL -->
 <script>
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
-});
-});
-document.querySelectorAll('.hidden')
-.forEach(el=>observer.observe(el));
+
+/* Carrusel automático */
+let slides=document.querySelectorAll('.slide');
+let index=0;
+setInterval(()=>{
+slides[index].classList.remove('active');
+index=(index+1)%slides.length;
+slides[index].classList.add('active');
+},3000);
+
 </script>
 
 </body>
