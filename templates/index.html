@@ -1,72 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<title>SUSHILANDIA & SNACK</title>
 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>SUSHILANDIA & SNACK</title>
+
+<meta name="description"
+content="Sushilandia & Snack - Rollos, Yakimeshi, Charolas y Combos. Ordena fácil por WhatsApp.">
+
+<!-- FUENTES -->
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== ANIMACION APP MODERNA ===== */
+/* ===== SCROLL ===== */
+html{
+scroll-behavior:smooth;
+}
+
+/* ===== BODY ===== */
 body{
 margin:0;
-padding-top:85px; /* Ajustado para que no tape secciones */
-font-family:'Montserrat',sans-serif;
+padding-top:90px;
 color:white;
+font-family:'Montserrat',sans-serif;
 text-align:center;
-overflow-x:hidden;
-animation:fadeApp 1.2s ease;
+
+background-image:url("{{ url_for('static', filename='img/fondo.jpg') }}");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+background-repeat:no-repeat;
 }
 
-@keyframes fadeApp{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-/* ===== FONDO CON MOVIMIENTO ===== */
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:url("{{ url_for('static', filename='img/fondo.jpg') }}") center/cover no-repeat;
-z-index:-2;
-animation:moveBg 25s infinite alternate ease-in-out;
-}
-
-@keyframes moveBg{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
-}
-
-body::after{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.55);
-z-index:-1;
-}
-
-/* ===== NAVBAR GLASS ===== */
+/* ===== NAVBAR ===== */
 .navbar{
 position:fixed;
 top:0;
 width:100%;
-background:rgba(0,0,0,0.55);
-backdrop-filter:blur(18px);
-padding:15px;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(15px);
+padding:18px;
 display:flex;
 justify-content:center;
-gap:25px;
+flex-wrap:wrap;
+gap:20px;
 z-index:1000;
-border-bottom:1px solid rgba(255,255,255,0.15);
+border-bottom:1px solid rgba(255,255,255,.1);
 }
 
 .navbar a{
@@ -81,45 +63,41 @@ color:#ffcc00;
 transform:scale(1.1);
 }
 
-/* ===== TITULO BRILLO ===== */
-.shine{
-font-family:'Bebas Neue',cursive;
-font-size:70px;
-letter-spacing:6px;
-background:linear-gradient(90deg,#ffcc00,#ffffff,#ffcc00);
-background-size:200% auto;
-color:transparent;
-background-clip:text;
--webkit-background-clip:text;
-animation:shine 3s linear infinite;
+/* ===== TITULO ===== */
+h1{
+font-family:'Bebas Neue';
+font-size:clamp(40px,7vw,70px);
+letter-spacing:5px;
+color:#ffcc00;
+text-shadow:0 8px 25px rgba(0,0,0,.8);
 }
 
-@keyframes shine{
-to{background-position:200% center;}
-}
-
+/* ===== SUBTITULOS ===== */
 h2{
-font-family:'Bebas Neue',cursive;
-font-size:38px;
+font-family:'Bebas Neue';
+font-size:clamp(28px,5vw,38px);
+letter-spacing:3px;
 margin-top:70px;
+text-shadow:0 5px 20px rgba(0,0,0,.9);
 }
 
-/* ===== TARJETAS GLASS ===== */
+/* ===== MENU ===== */
 .menu{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:30px;
-padding:30px;
+padding:25px;
 }
 
+/* ===== TARJETAS ===== */
 .plato{
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(20px);
+background:rgba(0,0,0,.65);
+backdrop-filter:blur(15px);
 padding:20px;
-border-radius:25px;
-border:1px solid rgba(255,255,255,0.15);
+border-radius:20px;
 transition:.4s;
+border:1px solid rgba(255,255,255,.1);
 }
 
 .plato:hover{
@@ -127,33 +105,41 @@ transform:translateY(-10px) scale(1.05);
 box-shadow:0 20px 40px rgba(0,0,0,.8);
 }
 
+/* ===== IMAGEN RESPONSIVE ===== */
 .plato img{
-width:300px;
-border-radius:20px;
-}
-
-/* ===== CARRUSEL ===== */
-.carousel{
-position:relative;
-width:300px;
-height:300px;
-margin:auto;
-overflow:hidden;
-}
-
-.slide{
-position:absolute;
 width:100%;
-height:100%;
-border-radius:20px;
-opacity:0;
-transition:opacity 1.2s ease-in-out;
-object-fit:cover;
-object-position:center;
+max-width:320px;
+border-radius:15px;
+transition:.5s;
 }
 
-.slide.active{
+.plato:hover img{
+transform:scale(1.08);
+}
+
+/* ===== LOADER ===== */
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+z-index:9999;
+}
+
+/* ===== SCROLL ANIMATION ===== */
+.hidden{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.show{
 opacity:1;
+transform:translateY(0);
 }
 
 /* ===== WHATSAPP ===== */
@@ -175,11 +161,18 @@ transition:.3s;
 transform:scale(1.1);
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-.plato img{width:240px;}
-.shine{font-size:50px;}
-.carousel{width:250px;height:250px;}
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+
+.navbar{
+padding:12px;
+gap:12px;
+}
+
+body{
+padding-top:110px;
+}
+
 }
 
 </style>
@@ -187,65 +180,112 @@ transform:scale(1.1);
 
 <body>
 
+<!-- LOADER -->
+<div id="loader">🍣 Cargando Sushilandia...</div>
+
+<!-- NAVBAR -->
 <div class="navbar">
 <a href="#promos">🔥 Promos</a>
 <a href="#rollos">🍣 Rollos</a>
+<a href="#yakimeshi">🍚 Yakimeshi</a>
+<a href="#charolas">🍱 Charolas</a>
 <a href="#combos">🥢 Combos</a>
 </div>
 
-<h1 class="shine">SUSHILANDIA & SNACK</h1>
+<h1>🍣 SUSHILANDIA & SNACK 🍣</h1>
 
-<!-- PROMOS -->
-<div id="promos">
-<h2>PROMOCIONES</h2>
-<div class="carousel">
-<img class="slide active" src="{{ url_for('static', filename='img/promo1.jpg') }}">
-<img class="slide" src="{{ url_for('static', filename='img/promo2.jpg') }}">
+<!-- SECCIONES -->
+<div class="hidden">
+<h2>LOGO DEL LOCAL</h2>
+<div class="menu">
+<div class="plato">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/logo.jpg') }}">
 </div>
 </div>
+</div>
 
-<!-- ROLLOS -->
-<div id="rollos">
+<div class="hidden" id="promos">
+<h2>PROMOCIONES DEL DÍA</h2>
+<div class="menu">
+<div class="plato">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/promo1.jpg') }}">
+</div>
+<div class="plato">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/promo2.jpg') }}">
+</div>
+</div>
+</div>
+
+<div class="hidden" id="rollos">
 <h2>ROLLOS</h2>
 <div class="menu">
 <div class="plato">
-<img src="{{ url_for('static', filename='img/rollo1.jpg') }}">
-</div>
-<div class="plato">
-<img src="{{ url_for('static', filename='img/rollo2.jpg') }}">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/rollos.jpg') }}">
 </div>
 </div>
 </div>
 
-<!-- COMBOS -->
-<div id="combos">
+<div class="hidden" id="yakimeshi">
+<h2>YAKIMESHI</h2>
+<div class="menu">
+<div class="plato">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/yakimeshi.jpg') }}">
+</div>
+</div>
+</div>
+
+<div class="hidden" id="charolas">
+<h2>CHAROLAS Y JACKETS</h2>
+<div class="menu">
+<div class="plato">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/charolas_jackets.jpg') }}">
+</div>
+</div>
+</div>
+
+<div class="hidden" id="combos">
 <h2>COMBOS</h2>
 <div class="menu">
 <div class="plato">
-<img src="{{ url_for('static', filename='img/combo1.jpg') }}">
-</div>
-<div class="plato">
-<img src="{{ url_for('static', filename='img/combo2.jpg') }}">
+<img loading="lazy"
+src="{{ url_for('static', filename='img/combos.jpg') }}">
 </div>
 </div>
 </div>
 
-<a class="whatsapp" href="https://wa.me/5213123098217" target="_blank">
+<!-- WHATSAPP -->
+<a class="whatsapp"
+href="https://wa.me/5213123098217"
+target="_blank"
+rel="noopener">
 📲 Ordenar
 </a>
 
+<!-- LOADER REAL -->
 <script>
+window.addEventListener("load",()=>{
+document.getElementById("loader").style.display="none";
+});
+</script>
 
-/* Carrusel 8 segundos */
-let slides=document.querySelectorAll('.slide');
-let index=0;
+<!-- SCROLL ANIMATION -->
+<script>
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
 
-setInterval(()=>{
-slides[index].classList.remove('active');
-index=(index+1)%slides.length;
-slides[index].classList.add('active');
-},8000);
-
+document.querySelectorAll('.hidden')
+.forEach(el=>observer.observe(el));
 </script>
 
 </body>
